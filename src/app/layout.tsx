@@ -1,16 +1,10 @@
 import type { Metadata } from 'next';
-import { Geist_Sans as GeistSans, Geist_Mono as GeistMono } from 'next/font/google'; // Correct import
+import { GeistSans } from 'geist/font/sans'; // Corrected import path
+import { GeistMono } from 'geist/font/mono'; // Corrected import path
 import './globals.css';
 
-const geistSans = GeistSans({ // Correct usage
-  variable: '--font-geist-sans',
-  subsets: ['latin'],
-});
-
-const geistMono = GeistMono({
-  variable: '--font-geist-mono',
-  subsets: ['latin'],
-});
+// No need to call the font functions here, just use the imported class names directly if needed
+// The variables are set globally via the import.
 
 export const metadata: Metadata = {
   title: 'GoalGetter - Track Your Progress',
@@ -23,8 +17,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="h-full">
-      <body className={`${geistSans.variable} ${geistMono.variable} font-sans antialiased flex flex-col min-h-screen bg-background text-foreground`}>
+    // Apply the font variables to the html tag for global scope
+    <html lang="en" className={`${GeistSans.variable} ${GeistMono.variable} h-full`}>
+      {/* Apply the base font style to body */}
+      <body className="font-sans antialiased flex flex-col min-h-screen bg-background text-foreground">
         {children}
       </body>
     </html>
